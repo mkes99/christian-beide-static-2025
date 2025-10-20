@@ -53,3 +53,7 @@ div.services .vc_column-inner h3{
 	text-align: center;
 	color: #ffffff;
 }
+
+body .reservation-form input[type="date"]{
+	max-height: 50px !important;
+}
