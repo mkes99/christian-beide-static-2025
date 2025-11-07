@@ -57,3 +57,16 @@ div.services .vc_column-inner h3{
 body .reservation-form input[type="date"]{
 	max-height: 50px !important;
 }
+
+body .reservation-form span.icon.icon-Message {
+	top: 29% !important;
+}
+
+body .special-heading img {
+	height: 100px;
+	margin: 0;
+}
+
+body .fancybox-title-float-wrap .child{
+	display: none;
+}
