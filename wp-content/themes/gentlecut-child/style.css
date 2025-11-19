@@ -81,3 +81,14 @@ div.process-page-background:before{
 	opacity: .6;
 	display: block;
 }
+
+#titlebar:before {
+	content: "";
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: #000000;
+	opacity: .5;
+	top: 0;
+	left: 0;
+}
