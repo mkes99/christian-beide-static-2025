@@ -47178,7 +47178,21 @@ function Iframe({
 	</head>
 	<body>
 		<script>document.currentScript.parentElement.remove()</script>
-	</body>
+	<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6Lf0tx8sAAAAALMvglaehk7XXBHduCJ12OPA4Fsh&amp;ver=3.0" id="google-recaptcha-js"></script>
+<script type="text/javascript" id="wpcf7-recaptcha-js-before">
+/* <![CDATA[ */
+var wpcf7_recaptcha = {
+    "sitekey": "6Lf0tx8sAAAAALMvglaehk7XXBHduCJ12OPA4Fsh",
+    "actions": {
+        "homepage": "homepage",
+        "contactform": "contactform"
+    }
+};
+//# sourceURL=wpcf7-recaptcha-js-before
+/* ]]> */
+</script>
+<script type="text/javascript" src="/wp-content/plugins/contact-form-7/modules/recaptcha/index.js?ver=6.1.4" id="wpcf7-recaptcha-js"></script>
+</body>
 </html>`;
   const [src, cleanup] = (0,external_wp_element_namespaceObject.useMemo)(() => {
     const _src = URL.createObjectURL(new window.Blob([html], {
