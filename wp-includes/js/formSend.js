@@ -9,6 +9,7 @@ let formReturnHtml = `
 `
 
 async function sendData() {
+    const boundary = "----WebKitFormBoundary" + Math.random().toString(36).slice(2);
     // Associate the FormData object with the form element
     const formData = new FormData(form);
     console.log("Form data.", formData);
@@ -19,7 +20,7 @@ async function sendData() {
     const response = await fetch("/formsend", {
         method: "POST",
         headers: { 
-            "Content-Type": "multipart/form-data",
+            "Content-Type": `multipart/form-data; boundary=${boundary}`,
         },
         body: formData,
     });
