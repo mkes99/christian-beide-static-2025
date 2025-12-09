@@ -8,5 +8,4 @@ export async function onRequestPost(context) {
         console.error('Error processing form submission:', error);
         return new Response('Error processing form submission', { status: 500 });
     }
-
 }
