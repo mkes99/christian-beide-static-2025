@@ -19,7 +19,7 @@ async function sendData() {
     const response = await fetch("/formsend", {
         method: "POST",
         headers: { 
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
         },
         body: formData,
     });
