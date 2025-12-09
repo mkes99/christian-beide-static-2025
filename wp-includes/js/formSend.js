@@ -12,15 +12,16 @@ async function sendData() {
     // Associate the FormData object with the form element
     const formData = new FormData(form);
     console.log("Form data.", formData);
-    const formValues = Object.fromEntries(formData.entries());
-    console.log("Form values.", formValues);
+    // const formValues = Object.fromEntries(formData.entries());
+    // console.log("Form values.", JSON.stringify(formValues),);
+ 
 
     const response = await fetch("/formsend", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(formValues),
+        body: formData,
     });
 
     if (!response.ok) {
