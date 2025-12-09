@@ -92,3 +92,12 @@ div.process-page-background:before{
 	top: 0;
 	left: 0;
 }
+
+
+div .agree {
+	display: inline-flex;
+}
+
+div .agree input[type="checkbox"] {
+	margin-top: 6px;
+}
