@@ -1,0 +1,67 @@
+---
+import { Font } from "astro:assets";
+import "@/styles/global.css";
+import { site } from "@/data/site";
+import SiteHeader from "@/components/site/SiteHeader.astro";
+import SiteFooter from "@/components/site/SiteFooter.astro";
+
+interface Props {
+  /** Page name. Shown in the title bar and the browser tab; leave out on the home page. */
+  title?: string;
+  /** Home page: transparent header over a hero image, no title bar. */
+  hero?: boolean;
+  /** Search result and share text; defaults to the site description. */
+  description?: string;
+}
+
+const { title, hero = false, description = site.description } = Astro.props;
+const pageTitle = title ? `${title} – ${site.title}` : site.title;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="max-image-preview:large" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <Font cssVariable="--fontOswald" preload />
+    <Font cssVariable="--fontOpenSans" preload />
+  </head>
+  <body>
+    <SiteHeader overlay={hero} />
+    {
+      title && (
+        <div class="titleBar">
+          <div class="container">
+            <h1>{title}</h1>
+          </div>
+        </div>
+      )
+    }
+    <main>
+      <slot />
+    </main>
+    <SiteFooter />
+    <a class="backToTop" href="#" aria-label="Back to top" hidden><span class="iconTop"></span></a>
+  </body>
+</html>
+
+<script>
+  import { initBackToTop } from "@/scripts/backToTop.js";
+  initBackToTop();
+
+  const year = String(new Date().getFullYear());
+  document.querySelectorAll("[data-year]").forEach((el) => {
+    el.textContent = year;
+  });
+</script>

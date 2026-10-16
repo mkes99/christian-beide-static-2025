@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets";
+import light from "@/assets/icons/light_seperator.png";
+import dark from "@/assets/icons/dark_seperator.png";
+
+interface Props {
+  title: string;
+  tone?: "dark" | "light";
+  size?: "large" | "small";
+  /** Space below the heading block, in px. */
+  gap?: number;
+}
+
+const { title, tone = "dark", size = "large", gap = 50 } = Astro.props;
+---
+
+<header class:list={["sectionHeading", tone, size]} style={`--gap: ${gap}px`}>
+  <h2>{title}</h2>
+  {size === "large" && <Image class="divider" src={tone === "light" ? light : dark} alt="" width={600} height={100} />}
+  <p><slot /></p>
+</header>

@@ -1,0 +1,13 @@
+---
+import { Image } from "astro:assets";
+import { site } from "@/data/site";
+import logo from "@/assets/brand/logo.png";
+
+interface Props {
+  width: number;
+}
+
+const { width } = Astro.props;
+---
+
+<a href="/"><Image src={logo} alt={site.title} width={width} densities={[1, 2]} loading="eager" /></a>

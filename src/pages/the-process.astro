@@ -1,0 +1,28 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { steps } from "@/data/processSteps";
+---
+
+<BaseLayout
+  title="The Process"
+  description="How a tattoo with Christian Biede works, from your first consultation and design to the tattoo session and aftercare."
+>
+  {
+    steps.map((step) => (
+      <section id={step.id} class:list={["step", { dark: step.dark }]}>
+        <div class="container stepInner">
+          <div class="stepCopy">
+            <h2>{step.title}</h2>
+            {step.paragraphs.map((text) => (
+              <p set:html={text} />
+            ))}
+          </div>
+          <div class="stepPhoto">
+            <Image src={step.photo} alt="" widths={[360, 720]} sizes="(min-width: 768px) 360px, 100vw" format="webp" />
+          </div>
+        </div>
+      </section>
+    ))
+  }
+</BaseLayout>

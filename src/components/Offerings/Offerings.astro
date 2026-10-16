@@ -1,0 +1,34 @@
+---
+import { Image } from "astro:assets";
+import SectionHeading from "@/components/SectionHeading/SectionHeading.astro";
+import { galleries } from "@/data/galleries";
+---
+
+<section class="offerings">
+  <div class="container">
+    <div class="offeringsInner">
+      <SectionHeading title="Offerings" tone="light" gap={30}>
+        My portfolio is diverse. I have developed my expertise and experience across a wide range of tattoo styles.
+        From bold color work and fine line detail to freehand design, I want to create pieces that fit each of my
+        client’s unique visions.
+      </SectionHeading>
+      <ul class="cards">
+        {
+          galleries.map((gallery) => (
+            <li class="card">
+              <Image
+                src={gallery.cover}
+                alt=""
+                widths={[300, 600]}
+                sizes="(min-width: 768px) 25vw, 100vw"
+                format="webp"
+              />
+              <h3>{gallery.title}</h3>
+              <a class="button" href={`/${gallery.slug}/`} aria-label={`See more ${gallery.title} tattoos`}>See More</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

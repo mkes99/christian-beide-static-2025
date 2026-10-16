@@ -1,0 +1,58 @@
+---
+import { Image, getImage } from "astro:assets";
+
+interface Props {
+  /** Folder name under src/assets/gallery. Images show in filename order. */
+  folder: string;
+  /** Used to build alt text for the images. */
+  label: string;
+}
+
+const { folder, label } = Astro.props;
+
+const modules = import.meta.glob<{ default: ImageMetadata }>("@/assets/gallery/*/*.{jpg,jpeg,png}", {
+  eager: true,
+});
+
+const images = Object.entries(modules)
+  .filter(([path]) => path.includes(`/gallery/${folder}/`))
+  .sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }))
+  .map(([, module]) => module.default);
+
+const items = await Promise.all(
+  images.map(async (image, index) => ({
+    image,
+    alt: `${label} tattoo ${index + 1}`,
+    full: (await getImage({ src: image, width: 1600, format: "webp" })).src,
+  })),
+);
+---
+
+<div class="container galleryPage">
+<ul class="gallery">
+  {
+    items.map(({ image, alt, full }, index) => (
+      <li class="galleryItem">
+        <a class="galleryLink" href={full} title={alt}>
+          <Image
+            src={image}
+            alt={alt}
+            widths={[400, 800]}
+            sizes="(min-width: 992px) 370px, (min-width: 768px) 50vw, 100vw"
+            format="webp"
+            loading={index < 6 ? "eager" : "lazy"}
+          />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+</div>
+<noscript><style>.galleryItem{visibility:visible}</style></noscript>
+
+<script>
+  import { initLightbox } from "@/scripts/lightbox.js";
+  import { initMasonry } from "@/scripts/masonry.js";
+  initLightbox();
+  initMasonry();
+</script>
