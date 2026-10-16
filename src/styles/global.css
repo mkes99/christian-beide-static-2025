@@ -702,7 +702,7 @@ footer .container {
 
 .contactForm .field {
   --top: 24px;
-  --iconTop: 48px;
+  --iconTop: 41px;
   position: relative;
   padding-top: var(--top);
 }
@@ -806,8 +806,9 @@ footer .container {
   cursor: pointer;
 }
 .contactForm .submit:disabled {
-  opacity: 0.5;
-  cursor: default;
+  background: #b5b5b5;
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
 .formMessage {

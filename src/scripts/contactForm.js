@@ -32,6 +32,14 @@ async function getToken() {
   return window.grecaptcha.execute(siteKey, { action: "contactform" });
 }
 
+const agree = form?.querySelector("#agree");
+const send = form?.querySelector("[type=submit]");
+const syncSend = () => {
+  send.disabled = !agree.checked;
+};
+agree?.addEventListener("change", syncSend);
+if (form) syncSend();
+
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
   const submit = form.querySelector("[type=submit]");
