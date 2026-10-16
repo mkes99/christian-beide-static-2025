@@ -1,0 +1,47 @@
+---
+import Logo from "@/components/site/Logo.astro";
+import { site } from "@/data/site";
+
+const { address, email, hours, socials } = site;
+---
+
+<footer>
+  <div class="footerInfo">
+    <div class="container">
+      <div class="infoItem start">
+        <div class="infoIcon iconMap"></div>
+        <p>
+          <strong>{site.studio}</strong><br />{address.street}<br />
+          {address.city}, {address.state} {address.zip}
+        </p>
+      </div>
+      <div class="infoItem">
+        <div class="infoIcon iconCalendar"></div>
+        <p>
+          <a href="/contact/">Book Appointment</a><br />
+          <a href={`mailto:${email}`}>{email}</a>
+        </p>
+      </div>
+      <div class="infoItem end">
+        <div class="infoIcon iconClock"></div>
+        <p>{hours[0]}<br />{hours[1]}<br /><a href="/contact/">schedule a consultation</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="copyright">
+    <div class="container">
+      <p class="copy">© <span data-year>{new Date().getFullYear()}</span> {site.name} - All Rights Reserved</p>
+      <div class="logo"><Logo width={100} /></div>
+      <div class="social">
+        {
+          socials.map((social) => (
+            <a href={social.href} target="_blank" rel="noopener" title={`Follow us on ${social.label}`}>
+              {social.icon}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>

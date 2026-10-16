@@ -1,0 +1,61 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site, fullAddress } from "@/data/site";
+import SectionHeading from "@/components/SectionHeading/SectionHeading.astro";
+import ContactForm from "@/components/ContactForm/ContactForm.astro";
+import location from "@/assets/contact/location.png";
+import email from "@/assets/contact/email.png";
+
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(fullAddress).replace(/%20/g, "+")}&output=embed`;
+
+const { street, city, state, zip } = site.address;
+
+const details = [
+  {
+    title: "Location",
+    icon: location,
+    lines: [site.studio, street, `${city}, ${state} ${zip}`].map((line) => line.toUpperCase()),
+  },
+  { title: "Email Us", icon: email, lines: [site.email] },
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Christian Biede at Dead West Tattoo Studio in Tucson, Arizona to book a tattoo. Send your idea, photos and questions."
+>
+  <section class="details container">
+    {
+      details.map((item) => (
+        <div class="detail">
+          <Image class="detailIcon" src={item.icon} alt="" width={60} height={60} />
+          <SectionHeading title={item.title} size="small" gap={0}>
+            {item.lines.map((line, i) => (
+              <>
+                {i > 0 && <br />}
+                {line}
+              </>
+            ))}
+          </SectionHeading>
+        </div>
+      ))
+    }
+  </section>
+
+  <section class="contactMessage container">
+    <SectionHeading title="Drop us a Line">
+      Have an idea in mind or just want to follow along? Fill out the contact form to start your tattoo journey or
+      subscribe for the latest news and updates.
+    </SectionHeading>
+    <ContactForm />
+  </section>
+
+  <iframe
+    class="contactMap"
+    title="Map of Dead West Tattoo Studio"
+    src={mapSrc}
+    loading="lazy"
+    allowfullscreen
+    referrerpolicy="no-referrer-when-downgrade"></iframe>
+</BaseLayout>

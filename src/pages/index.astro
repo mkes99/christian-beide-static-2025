@@ -1,0 +1,67 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { site } from "@/data/site";
+import Offerings from "@/components/Offerings/Offerings.astro";
+import SectionHeading from "@/components/SectionHeading/SectionHeading.astro";
+import ContactForm from "@/components/ContactForm/ContactForm.astro";
+import cactus from "@/assets/brand/cactus.png";
+import heroImage from "@/assets/backgrounds/hero.webp";
+import portrait from "@/assets/home/portrait.png";
+---
+
+<BaseLayout hero>
+  <section class="hero">
+    <Image
+      class="heroImage"
+      src={heroImage}
+      alt=""
+      widths={[640, 1024, 1600, 2000]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <Image class="heroLogo" src={cactus} alt="" width={192} densities={[1, 2]} loading="eager" />
+    <h1 class="heroTitle">{site.name} Tattoo</h1>
+    <p class="heroSubtitle">{site.address.city}, {site.address.state}</p>
+  </section>
+
+  <section class="intro container">
+    <div class="portrait">
+      <Image
+        src={portrait}
+        alt="Christian Biede"
+        widths={[480, 811, 1217]}
+        sizes="(min-width: 992px) 555px, (min-width: 576px) 480px, 100vw"
+        format="webp"
+      />
+    </div>
+    <div class="about">
+      <p>
+        I’ve been creating art for as long as I can remember. I earned my art degree from the University of Arizona in 2011, but have been tattooing since 2008. I discovered tattooing after getting my first tattoo and I was hooked. Over the past 20 years, I’ve had the privilege of working alongside some of the industry’s best, while developing my own unique approach to tattooing.
+      </p>
+      <p>
+        My work focuses on using color, light, and shadow to create bold and unique tattoos. Whether freehand or stenciled, I strive to capture each client’s vision and transform it into a piece of art they’ll carry with confidence for a lifetime. I love my hometown, Tucson, Arizona and I am particularly fond of creating desertscape designs that reflect the natural beauty of the Sonoran Desert.
+      </p>
+      <p>
+        Outside the studio, I am just as passionate about fitness and bodybuilding. Health, discipline, and self-improvement are a big part of who I am, and I see a deep connection between training the body and tattooing the skin. Both are about transformation, dedication, and building confidence, whether through physical strength or meaningful artwork.
+      </p>
+      <p>
+        For me tattoos are about telling stories, marking milestones and important moments, and helping people feel stronger in their own skin.
+      </p>
+      <div class="aboutAction"><a class="button" href="/contact/">Book Appointment</a></div>
+    </div>
+  </section>
+
+  <Offerings />
+
+  <section class="appointment">
+    <div class="container">
+      <SectionHeading title="Make An Appointment" gap={20}>
+        Reach out with your ideas. Please attach any reference images or images of tattoos that you are interested in
+        covering. Looking forward to connecting with you.
+      </SectionHeading>
+      <ContactForm />
+    </div>
+  </section>
+</BaseLayout>

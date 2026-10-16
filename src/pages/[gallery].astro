@@ -1,0 +1,15 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Gallery from "@/components/Gallery/Gallery.astro";
+import { galleries } from "@/data/galleries";
+
+export function getStaticPaths() {
+  return galleries.map((gallery) => ({ params: { gallery: gallery.slug }, props: gallery }));
+}
+
+const { slug, title } = Astro.props;
+---
+
+<BaseLayout title={title} description={`${title} tattoo work by Christian Biede at Dead West Tattoo Studio in Tucson, Arizona.`}>
+  <Gallery folder={slug} label={title} />
+</BaseLayout>

@@ -1,0 +1,41 @@
+---
+import Logo from "@/components/site/Logo.astro";
+import NavItems from "@/components/site/NavItems.astro";
+import { navLinks } from "@/data/navLinks";
+
+interface Props {
+  /** Transparent bar laid over the page's hero image. */
+  overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<header>
+  <div class:list={["siteBar", { overlay }]}>
+    <div class="container">
+      <div class="logo"><Logo width={100} /></div>
+      <nav class="siteNav" aria-label="Main">
+        <ul><NavItems items={navLinks} path={path} /></ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="mobileBar">
+    <div class="container">
+      <div class="logo"><Logo width={90} /></div>
+      <button type="button" id="mobileToggle" class="mobileToggle"><i class="iconMenu"></i></button>
+    </div>
+  </div>
+  <nav id="mobileNav" class="mobileNav" aria-label="Mobile">
+    <div class="container">
+      <ul><NavItems items={navLinks} path={path} mobile /></ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  import { initMenus } from "@/scripts/menu.js";
+  initMenus();
+</script>

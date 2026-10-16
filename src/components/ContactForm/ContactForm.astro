@@ -1,0 +1,53 @@
+---
+import { site } from "@/data/site";
+
+const siteKey = site.recaptchaSiteKey;
+---
+
+<div class="formWrap">
+  <p class="aside" aria-hidden="true">See More: @christianbiede</p>
+  <form id="contactForm" class="contactForm" action="/formsend" method="post" enctype="multipart/form-data" data-sitekey={siteKey}>
+    <div class="fields">
+      <div class="field">
+        <span class="fieldIcon">&#xe69c;</span>
+        <input type="text" name="name" placeholder="Your Name" aria-label="Your name" autocomplete="name" maxlength="400" required />
+      </div>
+      <div class="field">
+        <span class="fieldIcon">&#xe6b7;</span>
+        <input type="email" name="email" placeholder="Email Address" aria-label="Email address" autocomplete="email" maxlength="400" required />
+      </div>
+      <div class="field lower">
+        <span class="fieldIcon">&#xe674;</span>
+        <input type="tel" name="tel" placeholder="Phone Number" aria-label="Phone number" autocomplete="tel" maxlength="400" required />
+      </div>
+      <div class="field lower">
+        <label for="dob" class="fieldLabel">Date of Birth?</label>
+        <span class="fieldIcon">&#xe6c7;</span>
+        <input type="date" id="dob" name="date" />
+      </div>
+      <div class="field wide fieldMessage">
+        <span class="fieldIcon">&#xe6b2;</span>
+        <textarea name="textarea" placeholder="Your Tattoo Idea" aria-label="Your tattoo idea" maxlength="2000" required></textarea>
+      </div>
+      <div class="wide attach">
+        <label for="file">Attach Images</label>
+        <input type="file" id="file" name="file" accept="image/*" />
+      </div>
+      <div class="wide agree">
+        <input type="checkbox" id="agree" name="i_agree_privacy_policy" value="1" required />
+        <label for="agree">
+          I agree that my submitted data is being collected and stored. For further details on handling user data, see
+          our <a href="/privacy-policy/" target="_blank">Privacy Policy</a>
+        </label>
+      </div>
+      <div class="wide">
+        <input class="submit" type="submit" value="Send Message" />
+      </div>
+    </div>
+  </form>
+</div>
+
+<script is:inline src={`https://www.google.com/recaptcha/api.js?render=${siteKey}`} async defer></script>
+<script>
+  import "@/scripts/contactForm.js";
+</script>

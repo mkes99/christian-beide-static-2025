@@ -1,0 +1,34 @@
+---
+import type { NavLink } from "@/data/navLinks";
+
+interface Props {
+  items: NavLink[];
+  path: string;
+  mobile?: boolean;
+}
+
+const { items, path, mobile = false } = Astro.props;
+const isCurrent = (item: NavLink) => item.href === path;
+const hasCurrentChild = (item: NavLink) => item.children?.some(isCurrent) ?? false;
+---
+
+{
+  items.map((item) => (
+    <li
+      class:list={{
+        current: isCurrent(item) || hasCurrentChild(item),
+        hasSub: mobile && item.children,
+      }}
+    >
+      <a href={item.href ?? "#"} aria-current={isCurrent(item) ? "page" : undefined}>
+        {item.label}
+        {mobile && item.children && <i class="iconAngle" />}
+      </a>
+      {item.children && (
+        <ul class="subMenu">
+          <Astro.self items={item.children} path={path} mobile={mobile} />
+        </ul>
+      )}
+    </li>
+  ))
+}
